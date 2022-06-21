@@ -1,0 +1,76 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: aqua;
+  align-items: center;
+  padding: 1rem;
+
+  &__btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5.5rem;
+    height: 4.5rem;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    z-index: 500;
+    border: none;
+    overflow-y: hidden;
+  }
+
+  &__burger {
+    width: 2.5rem;
+    height: 0.3rem;
+    background-color: #000;
+    transition: all 0.5s ease-in-out;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 2.5rem;
+      height: 0.3rem;
+      background-color: #000;
+      transform: translate(-1.2rem, 1rem);
+      transition: all 0.5s ease-in-out;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 2.5rem;
+      height: 0.3rem;
+      background-color: #000;
+      transform: translate(-1.2rem, -1rem);
+      transition: all 0.5s ease-in-out;
+    }
+
+    &--open {
+      transform: translateX(-3rem);
+      background-color: transparent;
+
+      &::before {
+        transform: rotate(45deg) translate(1.3rem, -1.3rem);
+      }
+
+      &::after {
+        transform: rotate(-45deg) translate(1.3rem, 1.3rem);
+      }
+    }
+  }
+
+  &__logo {
+    font-size: 5rem;
+    transition: transform 0.5s ease-in-out;
+    transform: rotate(-45deg);
+    color: #fff;
+
+    &:hover {
+      transform: rotate(0);
+    }
+  }
+
+  &__list {
+    display: none;
+  }
+}
