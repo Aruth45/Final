@@ -1,9 +1,9 @@
 .navbar {
   display: flex;
   justify-content: space-between;
-  background-color: aqua;
+  background-color: transparent;
   align-items: center;
-  padding: 1rem;
+  width: 100%;
 
   &__btn {
     position: relative;
@@ -13,17 +13,17 @@
     width: 5.5rem;
     height: 4.5rem;
     cursor: pointer;
-    transition: all 0.5s ease-in-out;
     z-index: 500;
     border: none;
-    overflow-y: hidden;
+    padding: 1rem;
+    background-color: transparent;
   }
 
   &__burger {
     width: 2.5rem;
     height: 0.3rem;
     background-color: #000;
-    transition: all 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 
     &::before {
       content: "";
@@ -32,7 +32,7 @@
       height: 0.3rem;
       background-color: #000;
       transform: translate(-1.2rem, 1rem);
-      transition: all 0.5s ease-in-out;
+      transition: transform 0.5s ease-in-out;
     }
 
     &::after {
@@ -42,7 +42,7 @@
       height: 0.3rem;
       background-color: #000;
       transform: translate(-1.2rem, -1rem);
-      transition: all 0.5s ease-in-out;
+      transition: transform 0.5s ease-in-out;
     }
 
     &--open {
@@ -64,6 +64,8 @@
     transition: transform 0.5s ease-in-out;
     transform: rotate(-45deg);
     color: #fff;
+    padding: 1rem;
+
 
     &:hover {
       transform: rotate(0);
@@ -72,5 +74,22 @@
 
   &__list {
     display: none;
+  }
+
+  &__mobile {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    padding-right: 2rem;
+    top: 0;
+    left: 0;
+    transition: transform 0.5s ease-in;
+    transform: translateX(120vw);
+    z-index: 300;
+
+    &--show {
+      transform: translateX(0vw);
+    }
   }
 }

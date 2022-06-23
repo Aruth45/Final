@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <header className="header">
       <nav
-        aria-label="Mobile navigation main menu"
+        aria-label="Navigation main menu"
         role="navigation"
         className={`${block}`}
       >
@@ -43,6 +43,18 @@ function Navbar() {
           </li>
         </ul>
       </nav>
+
+      <div
+        className={
+          menu ? `${block}__mobile ${block}__mobile--show` : `${block}__mobile`
+        }
+      >
+        <ul role="menu" className={`${block}__list-mobile`}>
+          <li role="presentation">
+            <NavLink role="menuitem" to="/">Home</NavLink>
+          </li>
+        </ul>
+      </div>
     </header>
   );
 }
