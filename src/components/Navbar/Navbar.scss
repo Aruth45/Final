@@ -1,3 +1,7 @@
+.header {
+  padding: 1rem;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -17,13 +21,17 @@
     border: none;
     padding: 1rem;
     background-color: transparent;
+
+    @media (min-width: $bp-large) {
+      display: none;
+    }
   }
 
   &__burger {
     width: 2.5rem;
     height: 0.3rem;
     background-color: #000;
-    transition: transform 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 
     &::before {
       content: "";
@@ -47,7 +55,7 @@
 
     &--open {
       transform: translateX(-3rem);
-      background-color: transparent;
+      background: transparent;
 
       &::before {
         transform: rotate(45deg) translate(1.3rem, -1.3rem);
@@ -60,12 +68,10 @@
   }
 
   &__logo {
-    font-size: 5rem;
+    font-size: 4.5rem;
     transition: transform 0.5s ease-in-out;
     transform: rotate(-45deg);
-    color: #fff;
-    padding: 1rem;
-
+    color: #000;
 
     &:hover {
       transform: rotate(0);
@@ -74,6 +80,11 @@
 
   &__list {
     display: none;
+    list-style: none;
+
+    @media (min-width: $bp-large) {
+      display: flex;
+    }
   }
 
   &__mobile {
@@ -81,15 +92,67 @@
     width: 100vw;
     height: 100vh;
     background-color: #fff;
-    padding-right: 2rem;
     top: 0;
     left: 0;
     transition: transform 0.5s ease-in;
     transform: translateX(120vw);
     z-index: 300;
 
+    @media (min-width: $bp-large) {
+      display: none;
+    }
+
     &--show {
       transform: translateX(0vw);
+    }
+  }
+
+  &__title-menu {
+    margin-left: 2rem;
+  }
+
+  &__list-mobile {
+    padding-left: 0;
+    margin: 0 1rem;
+  }
+
+  &__item {
+    list-style: none;
+    border-bottom: solid 0.1rem #c4c4c4;
+
+    @media (min-width: $bp-large) {
+      border: none;
+    }
+  }
+
+  &__link {
+    padding: 2rem;
+    display: block;
+    color: #000;
+    text-decoration: none;
+    font-size: 2rem;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+
+    @media (min-width: $bp-large) {
+      padding: 0;
+      margin-right: 1rem;
+
+      &::after {
+        content: "";
+        bottom: -0.3rem;
+        left: 0;
+        width: 0;
+        height: 0.3rem;
+        border-radius: 0.3rem;
+        background-color: #000;
+        position: absolute;
+        transition: width 0.5s ease-in-out;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
     }
   }
 }

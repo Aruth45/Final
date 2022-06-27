@@ -19,6 +19,7 @@ function Navbar() {
         >
           <i className="fa fa-solid fa-book"></i>
         </NavLink>
+
         <button
           title={menu ? "Close main menu" : "Open main menu"}
           aria-haspopup="menu"
@@ -37,8 +38,8 @@ function Navbar() {
         </button>
         <ul role="menu" className={`${block}__list`}>
           <li role="presentation" className={`${block}__item`}>
-            <NavLink role="menuitem" to="/">
-              Hola
+            <NavLink className={`${block}__link`} role="menuitem" to="/login">
+              Login
             </NavLink>
           </li>
         </ul>
@@ -49,9 +50,29 @@ function Navbar() {
           menu ? `${block}__mobile ${block}__mobile--show` : `${block}__mobile`
         }
       >
+        <h2 className={`${block}__title-menu`}>Options</h2>
         <ul role="menu" className={`${block}__list-mobile`}>
-          <li role="presentation">
-            <NavLink role="menuitem" to="/">Home</NavLink>
+          <li className={`${block}__item`} role="presentation">
+            <NavLink
+              tabIndex={menu ? "1" : "-1"}
+              onClick={() => setMenu(!menu)}
+              className={`${block}__link`}
+              role="menuitem"
+              to="/create_account"
+            >
+              Create Account
+            </NavLink>
+          </li>
+          <li className={`${block}__item`} role="presentation">
+            <NavLink
+              tabIndex={menu ? "1" : "-1"}
+              onClick={() => setMenu(!menu)}
+              className={`${block}__link`}
+              role="menuitem"
+              to="/login"
+            >
+              Login
+            </NavLink>
           </li>
         </ul>
       </div>
