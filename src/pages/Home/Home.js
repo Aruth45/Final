@@ -1,9 +1,16 @@
+import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
+import useIsInViewport from "../../hooks/useInViewPort";
 
 function Home() {
   const block = "main";
 
+  const divShopperRef = useRef();
+  const divFinancialRef = useRef();
+
+  const onViewDivShoppers = useIsInViewport(divShopperRef);
+  const onViewDivFinancial = useIsInViewport(divFinancialRef);
 
   return (
     <>
@@ -70,7 +77,14 @@ function Home() {
 
         <section className={`${block}__benefits`}>
           <h2 className={`${block}__benefits-title`}>Why us?</h2>
-          <div className={`${block}__benefits-content`}>
+          <div
+            ref={divShopperRef}
+            className={
+              onViewDivShoppers
+                ? `${block}__benefits-content animate`
+                : `${block}__benefits-content`
+            }
+          >
             <div className={`${block}__benefits-img`}>
               <img alt="" src="https://i.imgur.com/l7fbBP6.png" />
             </div>
@@ -86,7 +100,14 @@ function Home() {
             </div>
           </div>
 
-          <div  className={`${block}__benefits-content reverse`}>
+          <div
+            ref={divFinancialRef}
+            className={
+              onViewDivFinancial
+                ? `${block}__benefits-content reverse animate`
+                : `${block}__benefits-content reverse`
+            }
+          >
             <div className={`${block}__benefits-img`}>
               <img alt="" src="https://i.imgur.com/D4FU2us.png" />
             </div>

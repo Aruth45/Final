@@ -7,9 +7,9 @@ function Navbar() {
 
   useEffect(() => {
     if (menu) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflowY = "hidden";
     } else {
-      document.body.style.overflow = "visible";
+      document.body.style.overflowY = "visible";
     }
   }, [menu]);
 
