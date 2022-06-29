@@ -1,0 +1,159 @@
+.header {
+  height: 40rem;
+  background-image: url(https://i.imgur.com/hUWtbEE.jpg);
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: $bp-medium) {
+    height: 60rem;
+  }
+}
+
+.hero-card {
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(16rem);
+  padding: 1rem 4rem;
+  width: 90%;
+  border: solid #c4c4c4 0.1rem;
+  border-radius: 1rem;
+  text-align: center;
+
+  @media (min-width: 791px) {
+    width: 60%;
+    left: 6rem;
+    transform: translateY(-18rem);
+  }
+
+  @media (min-width: $bp-large) {
+    width: 50%;
+  }
+
+  @media (min-width: $bp-extra-large) {
+    width: 35%;
+  }
+
+  &__text {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  &__btn {
+    @include button;
+  }
+}
+
+.main {
+  padding-top: 14rem;
+
+  @media (min-width: 791px) {
+    padding-top: 2rem;
+  }
+
+  &__callout {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 4rem;
+
+    &-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 90%;
+    }
+
+    &-content {
+      text-align: center;
+      height: 40rem;
+      flex-basis: 100%;
+
+      @media (min-width: $bp-medium) {
+        flex-basis: 25%;
+      }
+    }
+
+    &-title {
+      font-size: 3rem;
+    }
+
+    &-text {
+      font-size: 1.8rem;
+    }
+
+    &-img {
+      max-width: 15rem;
+    }
+  }
+
+  &__benefits {
+   
+
+    &-title {
+      text-align: center;
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+
+      &.reverse {
+        @media (min-width: $bp-medium) {
+          flex-direction: row-reverse;
+        }
+      }
+
+      @media (min-width: $bp-medium) {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+      }
+    }
+
+    &-img {
+      display: none;
+
+      @media (min-width: $bp-medium) {
+        display: block;
+        flex-basis: 50%;
+      }
+    }
+
+    &-text {
+  
+      & h4 {
+        text-transform: uppercase;
+      }
+
+      @media (min-width: $bp-medium) {
+        flex-basis: 50%;
+      }
+
+      @media (min-width: $bp-large) {
+        flex-basis: 40%;
+      }
+    }
+
+    &-headline {
+      font-size: 4rem;
+      line-height: 1.2;
+      margin-bottom: 0;
+    }
+
+    &-description {
+      margin-top: 1rem;
+    }
+  }
+}

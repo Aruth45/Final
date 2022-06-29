@@ -1,3 +1,5 @@
 @import "./styles/Base/base.scss";
-@import "./Variables/breakpoints.scss";
+@import "./styles/Variables/breakpoints.scss";
+@import "./styles/Mixins/buttons.scss";
 @import "./components/Navbar/Navbar.scss";
+@import "./pages/Home/Home.scss";

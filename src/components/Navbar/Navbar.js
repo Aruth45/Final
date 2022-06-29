@@ -1,23 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
   const block = "navbar";
   const [menu, setMenu] = useState(false);
 
+  useEffect(() => {
+    if (menu) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [menu]);
+
   return (
-    <header className="header">
+    <>
       <nav
         aria-label="Navigation main menu"
         role="navigation"
         className={`${block}`}
       >
-        <NavLink
-          aria-label="Go to home page"
-          className={`${block}__logo`}
-          to="/"
-        >
-          <i className="fa fa-solid fa-book"></i>
+        <NavLink aria-label="Go to home page" to="/">
+          <img
+            alt="Company's logo"
+            className={`${block}__logo`}
+            src="https://i.imgur.com/IHiVmil.png"
+          ></img>
         </NavLink>
 
         <button
@@ -46,6 +54,7 @@ function Navbar() {
       </nav>
 
       <div
+        aria-hidden={menu ? "false" : "true"}
         className={
           menu ? `${block}__mobile ${block}__mobile--show` : `${block}__mobile`
         }
@@ -76,7 +85,7 @@ function Navbar() {
           </li>
         </ul>
       </div>
-    </header>
+    </>
   );
 }
 
