@@ -5,9 +5,9 @@ const useIsInViewport = (element) => {
 
   const observer = useMemo(
     () =>
-      new IntersectionObserver(([entry]) =>
-        setIsIntersecting(entry.isIntersecting)
-      ),
+      new IntersectionObserver(([entry]) => {
+        setIsIntersecting(entry.isIntersecting);
+      }),
     []
   );
 
@@ -15,7 +15,6 @@ const useIsInViewport = (element) => {
     observer.observe(element.current);
 
     return () => observer.disconnect();
-    
   }, [element]);
 
   return isIntersecting;
