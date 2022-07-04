@@ -1,7 +1,9 @@
 @import "./styles/Base/base.scss";
 @import "./styles/Variables/breakpoints.scss";
+@import "./styles/Mixins/formsStyles.scss";
 @import "./styles/Mixins/buttons.scss";
 @import "./components/Input/Input.scss";
 @import "./components/Navbar/Navbar.scss";
 @import "./components/CreateAccountForm/CreateAccountForm.scss";
+@import "./components/FileInput/FileInput.scss";
 @import "./pages/Home/Home.scss";

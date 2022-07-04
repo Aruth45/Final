@@ -1,3 +1,15 @@
 .form__group {
-  margin-top: 4rem;
+  @include form-group;
+}
+
+.form__controls {
+  @include form-controls;
+}
+
+.form__group-label {
+  @include form-group-label;
+}
+
+.form__input {
+  @include input;
 }

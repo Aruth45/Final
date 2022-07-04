@@ -1,0 +1,21 @@
+.form__group-file {
+  margin-top: 4rem;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form__inputFile {
+  display: none;
+}
+
+.form__error {
+  @include errorText;
+}
+
+.form__inputFile-btn {
+  @include button;
+  width: 25rem;
+  margin: 0;
+}

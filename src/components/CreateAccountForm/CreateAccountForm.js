@@ -41,12 +41,12 @@ function CreateAccountForm() {
         ],
       },
 
-      salary: {
-        labelText: "Salary",
+      identification: {
+        labelText: "Identification",
         value: "",
         required: true,
-        type: "input",
-        placeholder: "200000",
+        type: "input:number",
+        placeholder: "117000511",
       },
     },
     stepThree: {
@@ -107,14 +107,22 @@ function CreateAccountForm() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    const user = {
+      fullname: formData.stepOne.fullName.value,
+      incomeSource: formData.stepTwo.income.value,
+      identification: parseInt(formData.stepTwo.identification.value),
+      email: formData.stepThree.email.value,
+      password: formData.stepThree.password.value,
+    };
 
-    const data = new FormData();
-    data.append("fullName", formData.stepOne.fullName.value);
-    data.append("profilePic", formData.stepOne.profilePic.value);
-    data.append("income", formData.stepTwo.income.value);
-    data.append("salary", formData.stepTwo.salary.value);
-    data.append("email", formData.stepThree.email.value);
-    data.append("password", formData.stepThree.password.value);
+    fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    })
+      .then((data) => data.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -172,7 +180,7 @@ function CreateAccountForm() {
               image: true,
             },
             { label: "Income", value: formData.stepTwo.income.value },
-            { label: "Salary", value: formData.stepTwo.salary.value },
+            { label: "Salary", value: formData.stepTwo.identification.value },
             { label: "Email", value: formData.stepThree.email.value },
             { label: "Password", value: formData.stepThree.password.value },
           ]}

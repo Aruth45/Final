@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const FileInput = ({ onChange, name, error, stepKey, fileName }) => {
   const fileInput = useRef();
 
-  const openFilePicker = () => {
+  const handleFilePicker = () => {
     fileInput.current.click();
   };
 
@@ -17,28 +17,19 @@ const FileInput = ({ onChange, name, error, stepKey, fileName }) => {
   };
 
   return (
-    <div>
+    <div className="form__group-file">
+      <button onClick={handleFilePicker} className="form__inputFile-btn">
+        Choose File
+      </button>
+      {error && <div className="form__error">{error}</div>}
       <input
+        className="form__inputFile"
         type="file"
         name={name}
         ref={fileInput}
         onChange={fileChangeHandler}
       />
-      <div>
-        <button type="button" onClick={openFilePicker}>
-          Choose file
-        </button>
-        <p>
-          {fileName}
-          {fileName !== "No file chosen" && (
-            <button
-              type="button"
-              onClick={() => onChange(name, {}, stepKey)}
-            ></button>
-          )}
-        </p>
-      </div>
-      {error && <div>{error}</div>}
+    
     </div>
   );
 };
