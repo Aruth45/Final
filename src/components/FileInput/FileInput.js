@@ -18,7 +18,7 @@ const FileInput = ({ onChange, name, error, stepKey, fileName }) => {
 
   return (
     <div className="form__group-file">
-      <button onClick={handleFilePicker} className="form__inputFile-btn">
+      <button type="button" onClick={handleFilePicker} className="form__inputFile-btn">
         Choose File
       </button>
       {error && <div className="form__error">{error}</div>}

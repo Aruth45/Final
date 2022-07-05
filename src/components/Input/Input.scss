@@ -2,6 +2,11 @@
   @include form-group;
 }
 
+.form__error {
+  @include errorText;
+ 
+}
+
 .form__controls {
   @include form-controls;
 }

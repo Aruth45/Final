@@ -2,9 +2,10 @@ import { useState } from "react";
 import Step from "../Step/Step";
 import FormsPreview from "../FormsPreview/FormsPreview";
 import Validator from "../../helpers/validator";
+import { useNavigate, Link } from "react-router-dom";
 
 function CreateAccountForm() {
-  const block = "form";
+  const block = "signupForm";
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     stepOne: {
@@ -45,8 +46,9 @@ function CreateAccountForm() {
         labelText: "Identification",
         value: "",
         required: true,
-        type: "input:number",
+        type: "input",
         placeholder: "117000511",
+        minLength: 9,
       },
     },
     stepThree: {
@@ -63,11 +65,21 @@ function CreateAccountForm() {
         labelText: "Password",
         value: "",
         required: true,
+        match: true,
+        type: "input:password",
+      },
+
+      confirmPassword: {
+        labelText: "Confirm Password",
+        value: "",
+        required: true,
+        match: true,
         type: "input:password",
       },
     },
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const changeHandler = (stepKey, e) => {
     setFormData((prev) => ({
@@ -105,87 +117,122 @@ function CreateAccountForm() {
     }
   };
 
+  const uploadImage = async (userData) => {
+    const imageData = new FormData();
+    imageData.append("file", formData.stepOne.profilePic.value);
+    imageData.append("upload_preset", "ss81vymd");
+
+    const response = await fetch(
+      "https://api.cloudinary.com/v1_1/dpvd14tr1/image/upload",
+      {
+        method: "POST",
+        body: imageData,
+      }
+    );
+
+    const imageInfo = await response.json();
+    userData.profilePic = imageInfo.url;
+
+    return userData;
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
+
     const user = {
       fullname: formData.stepOne.fullName.value,
       incomeSource: formData.stepTwo.income.value,
-      identification: parseInt(formData.stepTwo.identification.value),
+      identification: formData.stepTwo.identification.value,
       email: formData.stepThree.email.value,
       password: formData.stepThree.password.value,
     };
 
-    fetch("http://localhost:3000/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    })
-      .then((data) => data.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    uploadImage(user).then((userData) => {
+      fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      })
+        .then((data) => data.json())
+        .then((data) => {
+          if (data.error) {
+            console.log(data.details.errors);
+          } else {
+            navigate("/login");
+          }
+        });
+    });
   };
 
   return (
     <form className={`${block}`} onSubmit={submitHandler}>
-      {step === 1 ? (
-        <h1>Personal information</h1>
-      ) : step === 2 ? (
-        <h1>Income information</h1>
-      ) : step === 3 ? (
-        <h1>Login information</h1>
-      ) : (
-        <h1>Make sure everything is correct</h1>
-      )}
-      {step === 1 && (
-        <Step
-          data={formData.stepOne}
-          onChange={changeHandler}
-          onStepChange={stepChangeHandler}
-          onFileChange={fileChangeHandler}
-          errors={errors}
-          stepKey="stepOne"
-          step={1}
-        />
-      )}
-      {step === 2 && (
-        <Step
-          data={formData.stepTwo}
-          onChange={changeHandler}
-          onStepChange={stepChangeHandler}
-          errors={errors}
-          stepKey="stepTwo"
-          onPrevStep={(step) => setStep(step)}
-          step={2}
-        />
-      )}
-      {step === 3 && (
-        <Step
-          data={formData.stepThree}
-          onChange={changeHandler}
-          onStepChange={stepChangeHandler}
-          errors={errors}
-          stepKey="stepThree"
-          onPrevStep={(step) => setStep(step)}
-          step={3}
-        />
-      )}
-      {step === 4 && (
-        <FormsPreview
-          onPrevStep={() => setStep(step - 1)}
-          data={[
-            { label: "Full name", value: formData.stepOne.fullName.value },
-            {
-              label: "Profile pic",
-              value: URL.createObjectURL(formData.stepOne.profilePic.value),
-              image: true,
-            },
-            { label: "Income", value: formData.stepTwo.income.value },
-            { label: "Salary", value: formData.stepTwo.identification.value },
-            { label: "Email", value: formData.stepThree.email.value },
-            { label: "Password", value: formData.stepThree.password.value },
-          ]}
-        />
-      )}
+      <div className={`${block}__holder`}>
+        {step === 1 ? (
+          <h1 className={`${block}__heading`}>Personal information</h1>
+        ) : step === 2 ? (
+          <h1 className={`${block}__heading`}>Income information</h1>
+        ) : step === 3 ? (
+          <h1 className={`${block}__heading`}>Login information</h1>
+        ) : (
+          <h1 className={`${block}__heading`}>Preview</h1>
+        )}
+        {step === 1 && (
+          <Step
+            data={formData.stepOne}
+            onChange={changeHandler}
+            onStepChange={stepChangeHandler}
+            onFileChange={fileChangeHandler}
+            errors={errors}
+            stepKey="stepOne"
+            step={1}
+          />
+        )}
+        {step === 2 && (
+          <Step
+            data={formData.stepTwo}
+            onChange={changeHandler}
+            onStepChange={stepChangeHandler}
+            errors={errors}
+            stepKey="stepTwo"
+            onPrevStep={(step) => setStep(step)}
+            step={2}
+          />
+        )}
+        {step === 3 && (
+          <Step
+            data={formData.stepThree}
+            onChange={changeHandler}
+            onStepChange={stepChangeHandler}
+            errors={errors}
+            stepKey="stepThree"
+            onPrevStep={(step) => setStep(step)}
+            step={3}
+          />
+        )}
+        {step === 4 && (
+          <FormsPreview
+            onPrevStep={() => setStep(step - 1)}
+            data={[
+              { label: "Full name", value: formData.stepOne.fullName.value },
+              {
+                label: "Profile pic",
+                value: URL.createObjectURL(formData.stepOne.profilePic.value),
+                image: true,
+              },
+              { label: "Income", value: formData.stepTwo.income.value },
+              {
+                label: "Identification",
+                value: formData.stepTwo.identification.value,
+              },
+              { label: "Email", value: formData.stepThree.email.value },
+            ]}
+          />
+        )}
+      </div>
+
+      <Link className={`${block}__login-link`} to="/login">
+        Already have an account?
+      </Link>
     </form>
   );
 }

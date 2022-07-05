@@ -59,14 +59,24 @@ const Step = ({
   return (
     <>
       {output}
-      {step > 1 && (
-        <button type="button" onClick={() => onPrevStep(step - 1)}>
-          Go back
+      <div className="step__holder">
+        {step > 1 && (
+          <button
+            className="step__holder-btn"
+            type="button"
+            onClick={() => onPrevStep(step - 1)}
+          >
+            Go back
+          </button>
+        )}
+        <button
+          className="step__holder-btn"
+          type="button"
+          onClick={(e) => onStepChange(data, e)}
+        >
+          Next
         </button>
-      )}
-      <button type="button" onClick={(e) => onStepChange(data, e)}>
-        Next
-      </button>
+      </div>
     </>
   );
 };

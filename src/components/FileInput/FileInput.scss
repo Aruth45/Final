@@ -4,6 +4,7 @@
   position: relative;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
 }
 
 .form__inputFile {
@@ -15,7 +16,8 @@
 }
 
 .form__inputFile-btn {
-  @include button;
+  @include button-primary;
   width: 25rem;
-  margin: 0;
+  margin: 2rem 0;
+
 }

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function Input({
   type = "text",
@@ -12,10 +12,18 @@ function Input({
 }) {
   const [animation, setAnimation] = useState(false);
 
+  const inputRef = useRef();
+  
+
+  const handleClick = () => {
+    inputRef.current.focus();
+  };
+
   return (
     <div className="form__group">
-      <div className="form__controls">
+      <div className={animation ? "form__controls animate" : "form__controls"}>
         <label
+          onClick={handleClick}
           className={
             animation
               ? "form__group-label animate"
@@ -27,6 +35,7 @@ function Input({
           {labelText}
         </label>
         <input
+          ref={inputRef}
           onBlur={() => setAnimation(!animation)}
           onFocus={() => setAnimation(!animation)}
           className="form__input"

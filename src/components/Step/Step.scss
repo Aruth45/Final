@@ -1,0 +1,8 @@
+
+.step__holder {
+  @include steps;
+}
+
+.step__holder-btn {
+  @include button-secondary;
+}

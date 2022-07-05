@@ -1,13 +1,36 @@
 @mixin form-group {
-  margin-top: 4rem;
+  margin: 4rem 0;
 }
 
 @mixin form-controls {
   position: relative;
   height: 5rem;
-  width: 35rem;
+  width: 25rem;
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  @media (min-width: $bp-small) {
+    width: 35rem;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0.3rem;
+    border-radius: 0.2rem;
+    background-color: #000;
+    bottom: 0;
+    left: 0;
+    transition: width 0.5s ease-in-out;
+  }
+
+  &.animate {
+    &::before {
+      width: 100%;
+    }
+  }
 }
 
 @mixin input {
@@ -16,23 +39,64 @@
   background: none;
   padding: 2rem;
   font-size: 2rem;
-  border-radius: 0.5rem;
   border: none;
-  transition: border 0.5s ease-in-out;
+  outline: 0;
+  border-left: 0.3rem solid #000;
 }
 
 @mixin errorText {
   color: red;
-  margin: 2rem 0;
+  margin-top: 0.5rem;
 }
 
 @mixin form-group-label {
   position: absolute;
   left: 1rem;
   transform: translateY(1.5rem);
-  transition: transform 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  font-size: 2rem;
+  cursor: text;
 
   &.animate {
     transform: translateY(-3rem);
+    font-size: 1.6rem;
+  }
+}
+
+@mixin form-controls-select {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+
+  @media (min-width: $bp-small) {
+    width: 35rem;
+  }
+}
+
+@mixin form-select {
+  display: block;
+  padding: 1rem;
+  font-size: 2rem;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+@mixin form-select-heading {
+  font-size: 2rem;
+}
+
+@mixin steps {
+  width: 25rem;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 2rem;
+
+  @media (min-width: $bp-small) {
+    width: 35rem;
   }
 }

@@ -2,10 +2,15 @@ import PropTypes from "prop-types";
 
 const Select = ({ labelText, name, value, onChange, options, error }) => {
   return (
-    <div>
-      <div>
-      <label>{labelText}</label>
-        <select name={name} value={value} onChange={onChange}>
+    <div className="form__group">
+      <div className="form__controls-select">
+        <label className="form__select-heading">{labelText}</label>
+        <select
+          className="form__select"
+          name={name}
+          value={value}
+          onChange={onChange}
+        >
           {options.map((option, index) => (
             <option key={index} value={option.value}>
               {option.label}
@@ -13,7 +18,6 @@ const Select = ({ labelText, name, value, onChange, options, error }) => {
           ))}
         </select>
       </div>
-      {error && <div>{error}</div>}
     </div>
   );
 };

@@ -5,9 +5,20 @@ const validateEmail = (email) => {
 
 function Validator(inputs) {
   let errors = {};
+  const verifyMatch = [];
 
   for (let input in inputs) {
     const currentInput = inputs[input];
+
+    if (currentInput.match) {
+      verifyMatch.push(currentInput.value);
+
+      if (verifyMatch.length > 1) {
+        if (verifyMatch[0] !== verifyMatch[1]) {
+          errors[input] = "Password does not match";
+        }
+      }
+    }
 
     if (currentInput.required && currentInput.value === "") {
       errors[input] = "This field is required";

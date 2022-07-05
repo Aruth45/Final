@@ -2,6 +2,10 @@
 @import "./styles/Variables/breakpoints.scss";
 @import "./styles/Mixins/formsStyles.scss";
 @import "./styles/Mixins/buttons.scss";
+@import "./components/FormsPreview/FormsPreview.scss";
+@import "./components/Step/Step.scss";
+@import "./components/LoginForm/LoginForm.scss";
+@import "./components/Select/Select.scss";
 @import "./components/Input/Input.scss";
 @import "./components/Navbar/Navbar.scss";
 @import "./components/CreateAccountForm/CreateAccountForm.scss";

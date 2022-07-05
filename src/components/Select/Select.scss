@@ -1,4 +1,11 @@
-.form-control {
-    margin-top: 4rem;
-  }
-  
+.form__controls-select {
+  @include form-controls-select;
+}
+
+.form__select {
+  @include form-select;
+}
+
+.form__select-heading {
+  @include form-select-heading;
+}

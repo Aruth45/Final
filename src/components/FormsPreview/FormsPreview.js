@@ -1,32 +1,37 @@
 function FormsPreview({ data, onPrevStep }) {
   return (
-    <div>
-      <p>Your data</p>
-      <div>
-        <ul>
+    <>
+      <div className="preview">
+        <ul className="preview__list">
           {data.map((input, index) => (
-            <li key={index}>
+            <li className="preview__item" key={index}>
               {!input.image ? (
                 <>
                   <strong>{input.label}:</strong> {input.value}
                 </>
               ) : (
-                <div>
+                <div className="preview__img-container">
                   <strong>{input.label}:</strong>
-                  <img src={input.value} alt="Front face" />
+                  <img
+                    className="preview__img"
+                    src={input.value}
+                    alt="Front face"
+                  />
                 </div>
               )}
             </li>
           ))}
         </ul>
-        <div>
-          <button type="button" onClick={onPrevStep}>
-            Go back
-          </button>
-          <button type="submit">Submit form</button>
-        </div>
       </div>
-    </div>
+      <div className="step-holder">
+        <button className="step__holder-btn" type="button" onClick={onPrevStep}>
+          Go back
+        </button>
+        <button className="step__holder-btn" type="submit">
+          Submit form
+        </button>
+      </div>
+    </>
   );
 }
 
