@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 
+
 function LoginForm() {
   const [formData, setFormData] = useState({
     email: "",
@@ -36,9 +37,9 @@ function LoginForm() {
     }
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
+  useEffect(() => {
     if (token) {
       const user = jwt_decode(token);
 
@@ -49,6 +50,8 @@ function LoginForm() {
       }
     }
   }, []);
+
+  if (token) return null;
 
   return (
     <form className="loginForm">

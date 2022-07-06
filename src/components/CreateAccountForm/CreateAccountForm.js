@@ -175,9 +175,8 @@ function CreateAccountForm() {
     });
   };
 
+  const token = localStorage.getItem("token");
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
     if (token) {
       const user = jwt_decode(token);
       if (!user) {
@@ -187,6 +186,8 @@ function CreateAccountForm() {
       }
     }
   }, []);
+
+  if (token) return null;
 
   return (
     <form className={`${block}`} onSubmit={submitHandler}>
