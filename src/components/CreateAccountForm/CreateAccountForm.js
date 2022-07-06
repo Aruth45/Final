@@ -17,6 +17,15 @@ function CreateAccountForm() {
         type: "input",
         placeholder: "John Doe",
       },
+
+      ocupation: {
+        labelText: "Ocupation",
+        value: "",
+        required: true,
+        type: "input",
+        placeholder: "Lawyer",
+      },
+
       profilePic: {
         value: {},
         required: true,
@@ -142,6 +151,7 @@ function CreateAccountForm() {
 
     const user = {
       fullname: formData.stepOne.fullName.value,
+      ocupation: formData.stepOne.ocupation.value,
       incomeSource: formData.stepTwo.income.value,
       identification: formData.stepTwo.identification.value,
       email: formData.stepThree.username.value,
@@ -233,6 +243,7 @@ function CreateAccountForm() {
                 value: URL.createObjectURL(formData.stepOne.profilePic.value),
                 image: true,
               },
+              { label: "Ocupation", value: formData.stepOne.ocupation.value },
               { label: "Income", value: formData.stepTwo.income.value },
               {
                 label: "Identification",

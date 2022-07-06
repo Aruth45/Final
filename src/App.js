@@ -9,16 +9,13 @@ import Navbar from "./components/Navbar/Navbar";
 function App() {
   return (
     <Router>
-     
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="dashboard" element={<DashBoard />} />
-          <Route path="create_account" element={<CreateAccount />} />
-          <Route path="login" element={<Login />} />
-        </Routes>
-   
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="dashboard" element={<DashBoard />} />
+        <Route path="create_account" element={<CreateAccount />} />
+        <Route path="login" element={<Login />} />
+      </Routes>
     </Router>
   );
 }

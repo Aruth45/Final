@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
 import useIsInViewport from "../../hooks/useInViewPort";
 
 function Home() {
@@ -14,6 +15,7 @@ function Home() {
   return (
     <>
       <header className="header">
+        <Navbar />
         <div className="hero-card">
           <p className="hero-card__text">See if you are approved</p>
           <h2 className="hero-card__title">
