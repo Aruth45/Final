@@ -1,7 +1,8 @@
 import Validator from "../../helpers/validator";
 import Input from "../Input/Input";
-import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import jwt_decode from "jwt-decode";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -9,24 +10,45 @@ function LoginForm() {
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/users/login", {
+    const response = await fetch("http://localhost:4000/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
-    })
-      .then((data) => data.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    });
+
+    const data = await response.json();
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+      navigate("/dashboard");
+    } else {
+      navigate("/login");
+    }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const user = jwt_decode(token);
+
+      if (!user) {
+        localStorage.removeItem("token");
+      } else {
+        navigate("/dashboard");
+      }
+    }
+  }, []);
 
   return (
     <form className="loginForm">
@@ -58,7 +80,9 @@ function LoginForm() {
         </button>
       </div>
 
-      <Link className="loginForm__signup-link" to="/create_account">Don't have an account?</Link>
+      <Link className="loginForm__signup-link" to="/create_account">
+        Don't have an account?
+      </Link>
     </form>
   );
 }

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Step from "../Step/Step";
 import FormsPreview from "../FormsPreview/FormsPreview";
 import Validator from "../../helpers/validator";
 import { useNavigate, Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 function CreateAccountForm() {
   const block = "signupForm";
@@ -52,7 +53,7 @@ function CreateAccountForm() {
       },
     },
     stepThree: {
-      email: {
+      username: {
         labelText: "Email",
         value: "",
         required: true,
@@ -143,12 +144,12 @@ function CreateAccountForm() {
       fullname: formData.stepOne.fullName.value,
       incomeSource: formData.stepTwo.income.value,
       identification: formData.stepTwo.identification.value,
-      email: formData.stepThree.email.value,
+      email: formData.stepThree.username.value,
       password: formData.stepThree.password.value,
     };
 
     uploadImage(user).then((userData) => {
-      fetch("http://localhost:3000/users", {
+      fetch("http://localhost:4000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
@@ -163,6 +164,19 @@ function CreateAccountForm() {
         });
     });
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const user = jwt_decode(token);
+      if (!user) {
+        localStorage.removeItem("token");
+      } else {
+        navigate("/dashboard");
+      }
+    }
+  }, []);
 
   return (
     <form className={`${block}`} onSubmit={submitHandler}>
@@ -224,7 +238,7 @@ function CreateAccountForm() {
                 label: "Identification",
                 value: formData.stepTwo.identification.value,
               },
-              { label: "Email", value: formData.stepThree.email.value },
+              { label: "Email", value: formData.stepThree.username.value },
             ]}
           />
         )}
