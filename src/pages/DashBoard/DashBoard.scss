@@ -1,7 +1,7 @@
 .dashboard {
   width: 100vw;
   height: 100vh;
-  background-color: $color-background;
+  background-color: $color-light;
   user-select: none;
   overflow-x: hidden;
 
@@ -10,7 +10,11 @@
     width: 96%;
     margin: 0 auto;
     gap: 1.8rem;
-    grid-template-columns: 25rem auto 23rem;
+    grid-template-columns: 25rem auto 25rem;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 7rem auto 25rem;
+    }
   }
 
   &__link {
@@ -28,6 +32,11 @@
     &:last-child {
       position: absolute;
       bottom: 2rem;
+
+      @media (max-width: 1200px) {
+        position: relative;
+        margin-top: 2rem;
+      }
     }
 
     &:active {
@@ -98,13 +107,16 @@
     color: $color-warning;
   }
 
+  &__light-primary {
+    color: $color-light-primary;
+  }
+
   &__aside {
     height: 100vh;
     background-color: #fff;
   }
 
   &__top {
-    background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -114,6 +126,21 @@
   &__logo {
     display: flex;
     align-items: center;
+
+    @media (max-width: 1200px) {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  &__text-logo {
+    font-size: 2rem;
+    margin: 0;
+    color: $color-info-dark;
+
+    @media (max-width: 1200px) {
+      display: none;
+    }
   }
 
   &__img-logo {
@@ -141,15 +168,15 @@
     &-paragraph {
       font-weight: 500;
       margin: 0;
+
+      @media (max-width: 1200px) {
+        display: none;
+      }
     }
   }
 
-  &__main-content {
-    margin-top: 2rem;
-  }
-
   &__card-icon {
-    color: red;
+    color: $color-danger;
     font-size: 2rem;
   }
 
@@ -164,9 +191,14 @@
     font-size: 1.4rem;
   }
 
-  &__insights {
+  &__account-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
   }
 
   &__sales {
@@ -176,8 +208,16 @@
     margin-top: 1rem;
     box-shadow: $box-shadow;
     transition: box-shadow 0.3s ease;
-    width: 30rem;
     position: relative;
+    width: 30rem;
+
+    @media (max-width: 1260px) {
+      width: 20rem;
+    }
+
+    @media (max-width: 1200px) {
+      width: auto;
+    }
 
     &:hover {
       box-shadow: none;
@@ -185,7 +225,7 @@
   }
 
   &__bank-icon {
-    background-color: $color-primary;
+    background-color: $color-danger;
     padding: 0.8rem;
     border-radius: 50%;
     color: $color-white;
@@ -193,11 +233,15 @@
     margin-bottom: 2rem;
   }
 
-  &__middle {
+  &__account-middle {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
+
+    @media (max-width: 1200px) {
+      align-items: flex-start;
+    }
   }
 
   &__balance {
@@ -212,6 +256,14 @@
 
   &__history {
     margin-top: 2rem;
+
+    @media (max-width: 1200px) {
+      width: 94%;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 2rem 0 0 8rem;
+    }
   }
 
   &__history-heading {
@@ -227,13 +279,146 @@
     box-shadow: $box-shadow;
     transition: box-shadow 0.3s ease;
 
+    @media (max-width: 1200px) {
+      width: 83vw;
+    }
+
     &:hover {
       box-shadow: none;
+    }
+  }
+
+  &__last-th:last-child {
+    @media (max-width: 1200px) {
+      display: none;
     }
   }
 
   &__td {
     height: 2.8rem;
     border-bottom: 0.2rem solid $color-light;
+    color: $color-dark-variant;
+
+    @media (max-width: 1200px) {
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+
+  &__th {
+    @media (max-width: 1200px) {
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+
+  &__right {
+    margin-top: 2rem;
+  }
+
+  &__top-right {
+    display: flex;
+    justify-content: end;
+    gap: 2rem;
+  }
+
+  &__menu-btn {
+    display: none;
+  }
+
+  &__theme-toggler {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2.2rem;
+    width: 5.5rem;
+    cursor: pointer;
+    border-radius: $border-radius-1;
+    background-color: $color-light;
+    margin-right: 3rem;
+  }
+
+  &__theme-btn {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.light {
+      color: $color-primary;
+      border-radius: $border-radius-1;
+    }
+  }
+
+  &__profile {
+    display: flex;
+    gap: 2rem;
+    text-align: right;
+  }
+
+  &__recent-credits {
+    margin-top: 2rem;
+  }
+
+  &__credits {
+    background-color: $color-white;
+    padding: $card-padding;
+    border-radius: $card-border-radius;
+    box-shadow: $box-shadow;
+    transition: box-shadow 0.3s ease;
+  }
+
+  &__services {
+    margin-top: 2rem;
+  }
+
+  &__services-item {
+    background-color: $color-white;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius-1;
+    padding: 1.6rem $card-padding;
+    transition: box-shadow 0.3s ease;
+    box-shadow: $box-shadow;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
+  &__services-info-container {
+    width: 100%;
+  }
+
+  &__services-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__services-water {
+    color: $color-light-primary;
+    font-weight: bold;
+  }
+
+  &__services-phone {
+    color: $color-primary;
+    font-weight: bold;
+  }
+
+  &__services-power {
+    color: $color-warning;
+    font-weight: bold;
+  }
+
+  &__services-internet {
+    color: $color-dark-variant;
+    font-weight: bold;
   }
 }

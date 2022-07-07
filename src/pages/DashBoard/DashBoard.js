@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import jwt_decode from "jwt-decode";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,6 +11,13 @@ import {
   faArrowRightFromBracket,
   faCreditCard,
   faBuildingColumns,
+  faBars,
+  faSun,
+  faMoon,
+  faWater,
+  faBoltLightning,
+  faPhone,
+  faWifi,
 } from "@fortawesome/free-solid-svg-icons";
 
 function DashBoard() {
@@ -30,18 +36,15 @@ function DashBoard() {
     setUserData(data);
   };
 
+  const handlelogout = () => {
+    localStorage.removeItem("token");
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      const user = jwt_decode(token);
-
-      if (!user) {
-        localStorage.removeItem("token");
-        navigate("/login");
-      } else {
-        populateUser();
-      }
+      populateUser();
     } else {
       navigate("/login");
     }
@@ -60,7 +63,7 @@ function DashBoard() {
                     alt="Profile front face"
                     className={`${block}__img-logo`}
                   />
-                  <h2 className={`${block}__h2 ${block}__text-muted`}>
+                  <h2 className={`${block}__text-logo`}>
                     Konrad<span className={`${block}__danger`}>Bank</span>
                   </h2>
                 </div>
@@ -121,7 +124,11 @@ function DashBoard() {
                   </h3>
                 </NavLink>
 
-                <NavLink to="/" className={`${block}__link`}>
+                <NavLink
+                  onClick={handlelogout}
+                  to="/login"
+                  className={`${block}__link`}
+                >
                   <FontAwesomeIcon
                     className={`${block}__sidebar-icon`}
                     icon={faArrowRightFromBracket}
@@ -133,7 +140,7 @@ function DashBoard() {
               </div>
             </aside>
 
-            <main className={`${block}__main-content`}>
+            <main>
               <h1>DashBoard</h1>
 
               <div className={`${block}__personal-accounts`}>
@@ -151,14 +158,14 @@ function DashBoard() {
 
               {userData.accounts.map((account, index) => (
                 <>
-                  <div key={index} className={`${block}__insights`}>
+                  <div key={index} className={`${block}__account-container`}>
                     <div className={`${block}__sales`}>
                       <FontAwesomeIcon
                         className={`${block}__bank-icon`}
                         icon={faBuildingColumns}
                       />
 
-                      <div className={`${block}__middle`}>
+                      <div className={`${block}__account-middle`}>
                         <div className="left">
                           <h3 className={`${block}__h3`}>CR - Bank Acccount</h3>
                           <small className={`${block}__account-number`}>
@@ -178,7 +185,7 @@ function DashBoard() {
                         icon={faBuildingColumns}
                       />
 
-                      <div className={`${block}__middle`}>
+                      <div className={`${block}__account-middle`}>
                         <div className="left">
                           <h3 className={`${block}__h3`}>CR - Bank Acccount</h3>
                           <small className={`${block}__account-number`}>
@@ -197,7 +204,7 @@ function DashBoard() {
                         icon={faBuildingColumns}
                       />
 
-                      <div className={`${block}__middle`}>
+                      <div className={`${block}__account-middle`}>
                         <div className="left">
                           <h3 className={`${block}__h3`}>CR - Bank Acccount</h3>
                           <small className={`${block}__account-number`}>
@@ -219,10 +226,10 @@ function DashBoard() {
                 <table className={`${block}__table`}>
                   <thead>
                     <tr>
-                      <th>Daniel</th>
-                      <th>Daniel</th>
-                      <th>Daniel</th>
-                      <th>Daniel</th>
+                      <th className={`${block}__th`}>Action</th>
+                      <th className={`${block}__th`}>Amount</th>
+                      <th className={`${block}__th`}>Destination</th>
+                      <th className={`${block}__th`}>Date</th>
                     </tr>
                   </thead>
 
@@ -258,6 +265,115 @@ function DashBoard() {
                 </table>
               </div>
             </main>
+
+            <div className={`${block}__right`}>
+              <div className={`${block}__top-right`}>
+                <button className={`${block}__menu-btn`}>
+                  <FontAwesomeIcon icon={faBars} />
+                </button>
+
+                <div className={`${block}__theme-toggler`}>
+                  <FontAwesomeIcon
+                    className={`${block}__theme-btn light`}
+                    icon={faSun}
+                  />
+                  <FontAwesomeIcon
+                    className={`${block}__theme-btn`}
+                    icon={faMoon}
+                  />
+                </div>
+
+                <div className={`${block}__profile`}>
+                  <div className={`${block}__profile.info`}>
+                    <p className={`${block}__name`}>
+                      Hey
+                      <strong> {userData.user.fullname.split(" ")[0]}</strong>
+                    </p>
+                  </div>
+                  <div className={`${block}__profile-phone`}>
+                    <img
+                      className={`${block}__profile-pic`}
+                      src={userData.user.profilePic}
+                      alt="Profile front face"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className={`${block}__recent-credits`}>
+                <h2>Recent credits</h2>
+                <div className={`${block}__credits`}>
+                  <div className={`${block}__credit`}>
+                    <div className={`${block}__credit-info`}>
+                      <p>$100+</p>
+                      <small>23/08/2008</small>
+                    </div>
+                    <div className={`${block}__credit-info`}>
+                      <p>$100+</p>
+                      <small>23/08/2008</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className={`${block}__services`}>
+                <h2 className={`${block}__h2`}>Services</h2>
+
+                <div className={`${block}__services-item`}>
+                  <div className={`${block}__light-primary`}>
+                    <FontAwesomeIcon icon={faWater} />
+                  </div>
+
+                  <div className={`${block}__services-info-container`}>
+                    <div className={`${block}__services-info`}>
+                      <h3 className={`${block}__h3`}>Water</h3>
+                      <small className={`${block}__services-water`}>300</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={`${block}__services-item`}>
+                  <div className={`${block}__warning`}>
+                    <FontAwesomeIcon icon={faBoltLightning} />
+                  </div>
+
+                  <div className={`${block}__services-info-container`}>
+                    <div className={`${block}__services-info`}>
+                      <h3 className={`${block}__h3`}>Power</h3>
+                      <small className={`${block}__services-power`}>300</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={`${block}__services-item`}>
+                  <div className={`${block}__primary`}>
+                    <FontAwesomeIcon icon={faPhone} />
+                  </div>
+
+                  <div className={`${block}__services-info-container`}>
+                    <div className={`${block}__services-info`}>
+                      <h3 className={`${block}__h3`}>Phone</h3>
+                      <small className={`${block}__services-phone`}>300</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div className={`${block}__services-item`}>
+                  <div className={`${block}__secondary`}>
+                    <FontAwesomeIcon icon={faWifi} />
+                  </div>
+
+                  <div className={`${block}__services-info-container`}>
+                    <div className={`${block}__services-info`}>
+                      <h3 className={`${block}__h3`}>Internet</h3>
+                      <small className={`${block}__services-internet`}>
+                        300
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
