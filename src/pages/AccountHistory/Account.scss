@@ -1,0 +1,102 @@
+.records {
+  display: grid;
+  grid-template-columns: 30rem 60rem;
+  height: 100vh;
+  background-color: $color-light;
+  gap: 2rem;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 7rem auto;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
+
+  &__container {
+    margin-top: 2rem;
+    padding: 0 2rem;
+    overflow-y: auto;
+  }
+
+  &__item {
+    background-color: $color-white;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 4rem;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius-1;
+    padding: 1.6rem 1rem;
+    transition: box-shadow 0.3s ease;
+    box-shadow: $box-shadow;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
+  
+
+  &__destination {
+    color: $color-primary;
+    font-weight: bold;
+  }
+
+  &__amount {
+    color: $color-dark-variant;
+    font-weight: bold;
+  }
+
+  &__action {
+    color: $color-warning;
+    font-weight: bold;
+  }
+
+  &__h2 {
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  &__h3 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  &__primary {
+    color: $color-primary;
+  }
+
+  &__danger {
+    color: $color-danger;
+  }
+
+  &__success {
+    color: $color-success;
+  }
+
+  &__warning {
+    color: $color-warning;
+  }
+
+  &__light-primary {
+    color: $color-light-primary;
+  }
+
+  &__menu-btn {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: inline-block;
+      background: transparent;
+      cursor: pointer;
+      color: $color-dark-variant;
+      position: absolute;
+      left: 2rem;
+      border: none;
+      font-size: 2rem;
+      bottom: 2rem;
+    }
+  }
+}

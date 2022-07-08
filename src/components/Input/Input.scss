@@ -1,10 +1,12 @@
-.form__group {
-  @include form-group;
+.input {
+  &__group {
+    @include form-group;
+    margin-top: 4rem;
+  }
 }
 
 .form__error {
   @include errorText;
- 
 }
 
 .form__controls {

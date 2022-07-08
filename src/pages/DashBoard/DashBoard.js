@@ -1,14 +1,8 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DashBoardNav from "../../components/DasboardNav/DashboardNav";
 import {
-  faXmark,
-  faList,
-  faFile,
-  faMoneyBillTransfer,
-  faHandHoldingDollar,
-  faReceipt,
-  faArrowRightFromBracket,
   faCreditCard,
   faBuildingColumns,
   faBars,
@@ -23,6 +17,7 @@ import {
 function DashBoard() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState();
+  const [menu, setMenu] = useState(false);
   const block = "dashboard";
 
   const populateUser = async () => {
@@ -34,10 +29,6 @@ function DashBoard() {
 
     const data = await response.json();
     setUserData(data);
-  };
-
-  const handlelogout = () => {
-    localStorage.removeItem("token");
   };
 
   useEffect(() => {
@@ -55,90 +46,7 @@ function DashBoard() {
       {userData && (
         <div className={`${block}`}>
           <div className={`${block}__container`}>
-            <aside className={`${block}__aside`}>
-              <div className={`${block}__top`}>
-                <div className={`${block}__logo`}>
-                  <img
-                    src="https://i.imgur.com/IHiVmil.png"
-                    alt="Profile front face"
-                    className={`${block}__img-logo`}
-                  />
-                  <h2 className={`${block}__text-logo`}>
-                    Konrad<span className={`${block}__danger`}>Bank</span>
-                  </h2>
-                </div>
-
-                <div className={`${block}__close`}>
-                  <FontAwesomeIcon icon={faXmark} />
-                </div>
-              </div>
-
-              <div className={`${block}__sidebar`}>
-                <NavLink to="/" className={`${block}__link`}>
-                  <FontAwesomeIcon
-                    className={`${block}__sidebar-icon`}
-                    icon={faList}
-                  />
-                  <h3 className={`${block}__h3 ${block}__sidebar-paragraph`}>
-                    DashBoard
-                  </h3>
-                </NavLink>
-
-                <NavLink to="/" className={`${block}__link`}>
-                  <FontAwesomeIcon
-                    className={`${block}__sidebar-icon`}
-                    icon={faFile}
-                  />
-                  <h3 className={`${block}__h3 ${block}__sidebar-paragraph`}>
-                    Account history
-                  </h3>
-                </NavLink>
-
-                <NavLink to="/" className={`${block}__link`}>
-                  <FontAwesomeIcon
-                    className={`${block}__sidebar-icon`}
-                    icon={faMoneyBillTransfer}
-                  />
-                  <h3 className={`${block}__h3 ${block}__sidebar-paragraph`}>
-                    Send money
-                  </h3>
-                </NavLink>
-
-                <NavLink to="/" className={`${block}__link`}>
-                  <FontAwesomeIcon
-                    className={`${block}__sidebar-icon`}
-                    icon={faHandHoldingDollar}
-                  />
-                  <h3 className={`${block}__h3 ${block}__sidebar-paragraph`}>
-                    Add money
-                  </h3>
-                </NavLink>
-
-                <NavLink to="/" className={`${block}__link`}>
-                  <FontAwesomeIcon
-                    className={`${block}__sidebar-icon`}
-                    icon={faReceipt}
-                  />
-                  <h3 className={`${block}__h3 ${block}__sidebar-paragraph`}>
-                    Services
-                  </h3>
-                </NavLink>
-
-                <NavLink
-                  onClick={handlelogout}
-                  to="/login"
-                  className={`${block}__link`}
-                >
-                  <FontAwesomeIcon
-                    className={`${block}__sidebar-icon`}
-                    icon={faArrowRightFromBracket}
-                  />
-                  <h3 className={`${block}__h3 ${block}__sidebar-paragraph`}>
-                    Logout
-                  </h3>
-                </NavLink>
-              </div>
-            </aside>
+            <DashBoardNav menu={menu} setMenu={setMenu} />
 
             <main>
               <h1>DashBoard</h1>
@@ -156,73 +64,30 @@ function DashBoard() {
                 </div>
               </div>
 
-              {userData.accounts.map((account, index) => (
-                <>
-                  <div key={index} className={`${block}__account-container`}>
-                    <div className={`${block}__sales`}>
-                      <FontAwesomeIcon
-                        className={`${block}__bank-icon`}
-                        icon={faBuildingColumns}
-                      />
+              <div className={`${block}__account-container`}>
+                {userData.accounts.map((account) => (
+                  <div key={account.account} className={`${block}__account`}>
+                    <FontAwesomeIcon
+                      className={`${block}__bank-icon`}
+                      icon={faBuildingColumns}
+                    />
 
-                      <div className={`${block}__account-middle`}>
-                        <div className="left">
-                          <h3 className={`${block}__h3`}>CR - Bank Acccount</h3>
-                          <small className={`${block}__account-number`}>
-                            Account: CR {account.account}
-                          </small>
-                        </div>
-
-                        <strong className={`${block}__balance`}>
-                          ₡{account.balance}
-                        </strong>
+                    <div className={`${block}__account-middle`}>
+                      <div className="left">
+                        <h3 className={`${block}__h3`}>CR - Bank Acccount</h3>
+                        <small className={`${block}__account-number`}>
+                          Account: CR {account.account}
+                        </small>
                       </div>
-                    </div>
-
-                    <div className={`${block}__sales`}>
-                      <FontAwesomeIcon
-                        className={`${block}__bank-icon`}
-                        icon={faBuildingColumns}
-                      />
-
-                      <div className={`${block}__account-middle`}>
-                        <div className="left">
-                          <h3 className={`${block}__h3`}>CR - Bank Acccount</h3>
-                          <small className={`${block}__account-number`}>
-                            Account: CR {account.account}
-                          </small>
-                        </div>
-                        <strong className={`${block}__balance`}>
-                          ₡{account.balance}
-                        </strong>
-                      </div>
-                    </div>
-
-                    <div className={`${block}__sales`}>
-                      <FontAwesomeIcon
-                        className={`${block}__bank-icon`}
-                        icon={faBuildingColumns}
-                      />
-
-                      <div className={`${block}__account-middle`}>
-                        <div className="left">
-                          <h3 className={`${block}__h3`}>CR - Bank Acccount</h3>
-                          <small className={`${block}__account-number`}>
-                            Account: CR {account.account}
-                          </small>
-                        </div>
-                        <strong className={`${block}__balance`}>
-                          ₡{account.balance}
-                        </strong>
-                      </div>
+                      <strong className={`${block}__balance`}>
+                        ₡{account.balance}
+                      </strong>
                     </div>
                   </div>
-                </>
-              ))}
-
+                ))}
+              </div>
               <div className={`${block}__history`}>
                 <h2 className={`${block}__history-heading`}>Account history</h2>
-
                 <table className={`${block}__table`}>
                   <thead>
                     <tr>
@@ -233,42 +98,17 @@ function DashBoard() {
                     </tr>
                   </thead>
 
-                  <tbody>
-                    <tr>
-                      <td className={`${block}__td`}>Some text</td>
-                      <td className={`${block}__td`}>Some text</td>
-                      <td className={`${block}__td`}>Some text</td>
-                      <td className={`${block}__td`}>Some text</td>
-                    </tr>
-
-                    <tr>
-                      <td className={`${block}__td`}>Some text</td>
-                      <td className={`${block}__td`}>Some text</td>
-                      <td className={`${block}__td`}>Some text</td>
-                      <td className={`${block}__td`}>Some text</td>
-                    </tr>
-
-                    <tr>
-                      <td className={`${block}__td`}>Some text</td>
-                      <td className={`${block}__td`}>Some text</td>
-                      <td className={`${block}__td`}>Some text</td>
-                      <td className={`${block}__td`}>Some text</td>
-                    </tr>
-
-                    <tr>
-                      <td className={`${block}__td`}>Some text</td>
-                      <td className={`${block}__td`}>Some text</td>
-                      <td className={`${block}__td`}>Some text</td>
-                      <td className={`${block}__td`}>Some text</td>
-                    </tr>
-                  </tbody>
+                  <tbody></tbody>
                 </table>
               </div>
             </main>
 
             <div className={`${block}__right`}>
               <div className={`${block}__top-right`}>
-                <button className={`${block}__menu-btn`}>
+                <button
+                  onClick={() => setMenu(!menu)}
+                  className={`${block}__menu-btn`}
+                >
                   <FontAwesomeIcon icon={faBars} />
                 </button>
 
@@ -284,7 +124,7 @@ function DashBoard() {
                 </div>
 
                 <div className={`${block}__profile`}>
-                  <div className={`${block}__profile.info`}>
+                  <div className={`${block}__profile-info`}>
                     <p className={`${block}__name`}>
                       Hey
                       <strong> {userData.user.fullname.split(" ")[0]}</strong>

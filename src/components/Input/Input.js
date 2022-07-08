@@ -20,7 +20,7 @@ function Input({
   };
 
   return (
-    <div className="form__group">
+    <div className="input__group">
       <div className={animation ? "form__controls animate" : "form__controls"}>
         <label
           onClick={handleClick}

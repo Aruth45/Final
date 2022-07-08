@@ -1,5 +1,11 @@
-.form__controls-select {
-  @include form-controls-select;
+.select {
+  &__group {
+    @include form-group;
+  }
+
+  &__controls {
+    @include form-controls;
+  }
 }
 
 .form__select {

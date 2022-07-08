@@ -167,7 +167,7 @@ function CreateAccountForm() {
         .then((data) => data.json())
         .then((data) => {
           if (data.error) {
-            console.log(data.details.errors);
+            console.log(data);
           } else {
             navigate("/login");
           }
@@ -201,59 +201,62 @@ function CreateAccountForm() {
         ) : (
           <h1 className={`${block}__heading`}>Preview</h1>
         )}
-        {step === 1 && (
-          <Step
-            data={formData.stepOne}
-            onChange={changeHandler}
-            onStepChange={stepChangeHandler}
-            onFileChange={fileChangeHandler}
-            errors={errors}
-            stepKey="stepOne"
-            step={1}
-          />
-        )}
-        {step === 2 && (
-          <Step
-            data={formData.stepTwo}
-            onChange={changeHandler}
-            onStepChange={stepChangeHandler}
-            errors={errors}
-            stepKey="stepTwo"
-            onPrevStep={(step) => setStep(step)}
-            step={2}
-          />
-        )}
-        {step === 3 && (
-          <Step
-            data={formData.stepThree}
-            onChange={changeHandler}
-            onStepChange={stepChangeHandler}
-            errors={errors}
-            stepKey="stepThree"
-            onPrevStep={(step) => setStep(step)}
-            step={3}
-          />
-        )}
-        {step === 4 && (
-          <FormsPreview
-            onPrevStep={() => setStep(step - 1)}
-            data={[
-              { label: "Full name", value: formData.stepOne.fullName.value },
-              {
-                label: "Profile pic",
-                value: URL.createObjectURL(formData.stepOne.profilePic.value),
-                image: true,
-              },
-              { label: "Ocupation", value: formData.stepOne.ocupation.value },
-              { label: "Income", value: formData.stepTwo.income.value },
-              {
-                label: "Identification",
-                value: formData.stepTwo.identification.value,
-              },
-              { label: "Email", value: formData.stepThree.username.value },
-            ]}
-          />
-        )}
+        <div className={`${block}__input-section`}>
+          {step === 1 && (
+            <Step
+              data={formData.stepOne}
+              onChange={changeHandler}
+              onStepChange={stepChangeHandler}
+              onFileChange={fileChangeHandler}
+              errors={errors}
+              stepKey="stepOne"
+              step={1}
+            />
+          )}
+
+          {step === 2 && (
+            <Step
+              data={formData.stepTwo}
+              onChange={changeHandler}
+              onStepChange={stepChangeHandler}
+              errors={errors}
+              stepKey="stepTwo"
+              onPrevStep={(step) => setStep(step)}
+              step={2}
+            />
+          )}
+          {step === 3 && (
+            <Step
+              data={formData.stepThree}
+              onChange={changeHandler}
+              onStepChange={stepChangeHandler}
+              errors={errors}
+              stepKey="stepThree"
+              onPrevStep={(step) => setStep(step)}
+              step={3}
+            />
+          )}
+          {step === 4 && (
+            <FormsPreview
+              onPrevStep={() => setStep(step - 1)}
+              data={[
+                { label: "Full name", value: formData.stepOne.fullName.value },
+                {
+                  label: "Profile pic",
+                  value: URL.createObjectURL(formData.stepOne.profilePic.value),
+                  image: true,
+                },
+                { label: "Ocupation", value: formData.stepOne.ocupation.value },
+                { label: "Income", value: formData.stepTwo.income.value },
+                {
+                  label: "Identification",
+                  value: formData.stepTwo.identification.value,
+                },
+                { label: "Email", value: formData.stepThree.username.value },
+              ]}
+            />
+          )}
+        </div>
       </div>
 
       <Link className={`${block}__login-link`} to="/login">

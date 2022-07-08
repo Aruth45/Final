@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: $color-light;
 
   &__holder {
     position: relative;
@@ -13,10 +14,8 @@
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
-    box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.75);
-    border-radius: 0.5rem;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius-2;
     min-height: 35rem;
     width: 36rem;
     overflow-y: auto;
@@ -41,7 +40,7 @@
 
   &__signup-link {
     margin-top: 2rem;
-    color: #094293; 
+    color: #094293;
     text-decoration: none;
   }
 }

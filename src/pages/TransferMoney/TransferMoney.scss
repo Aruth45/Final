@@ -1,0 +1,69 @@
+.transfers {
+  display: grid;
+  grid-template-columns: 30rem 40rem;
+  height: 100vh;
+  background-color: $color-light;
+  gap: 2rem;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 7rem 40rem;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+
+  &__h2 {
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  &__h3 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  &__menu-btn {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: inline-block;
+      background: transparent;
+      cursor: pointer;
+      color: $color-dark-variant;
+      position: absolute;
+      left: 2rem;
+      border: none;
+      font-size: 2rem;
+      bottom: 2rem;
+    }
+  }
+
+  &__select {
+    @include form-select;
+  }
+
+  &__input-container {
+    margin-top: 8rem;
+  }
+
+  &__form {
+    padding: 2rem;
+  }
+
+  &__transfer-btn {
+    background: $color-danger;
+    border: none;
+    box-shadow: $box-shadow;
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: $border-radius-1;
+    transition: background 0.5s ease;
+    color: $color-white;
+    font-size: 2rem;
+
+    &:hover {
+      background-color: #e50000;
+    }
+  }
+}

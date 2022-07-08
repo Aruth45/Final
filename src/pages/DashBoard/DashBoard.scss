@@ -15,6 +15,11 @@
     @media (max-width: 1200px) {
       grid-template-columns: 7rem auto 25rem;
     }
+
+    @media (max-width: 768px) {
+      width: 100%;
+      grid-template-columns: 1fr;
+    }
   }
 
   &__link {
@@ -36,6 +41,11 @@
       @media (max-width: 1200px) {
         position: relative;
         margin-top: 2rem;
+      }
+
+      @media (max-width: 768px) {
+        position: absolute;
+        bottom: 5rem;
       }
     }
 
@@ -111,9 +121,10 @@
     color: $color-light-primary;
   }
 
-  &__aside {
-    height: 100vh;
-    background-color: #fff;
+  @keyframes showMenu {
+    to {
+      left: 0;
+    }
   }
 
   &__top {
@@ -128,8 +139,8 @@
     align-items: center;
 
     @media (max-width: 1200px) {
-      justify-content: center;
       width: 100%;
+      margin-left: 2rem;
     }
   }
 
@@ -141,6 +152,10 @@
     @media (max-width: 1200px) {
       display: none;
     }
+
+    @media (max-width: 768px) {
+      display: initial;
+    }
   }
 
   &__img-logo {
@@ -148,8 +163,16 @@
     height: 3rem;
   }
 
-  &__close {
+  &__close-btn {
     display: none;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+
+    @media (max-width: 768px) {
+      display: inline-block;
+      cursor: pointer;
+    }
   }
 
   &__sidebar {
@@ -172,6 +195,10 @@
       @media (max-width: 1200px) {
         display: none;
       }
+
+      @media (max-width: 768px) {
+        display: inline;
+      }
     }
   }
 
@@ -185,6 +212,10 @@
     align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
+
+    @media (max-width: 768px) {
+      padding: 2rem;
+    }
   }
 
   &__name {
@@ -199,9 +230,13 @@
       grid-template-columns: 1fr;
       gap: 0;
     }
+
+    @media (max-width: 768px) {
+      padding: 0 2rem;
+    }
   }
 
-  &__sales {
+  &__account {
     background-color: $color-white;
     padding: $card-padding 2rem 4rem 2rem;
     border-radius: $card-border-radius;
@@ -264,6 +299,13 @@
       transform: translateX(-50%);
       margin: 2rem 0 0 8rem;
     }
+
+    @media (max-width: 768px) {
+      position: relative;
+      margin: 3rem 0 0 0;
+      width: 100%;
+      padding: 1rem 2rem;
+    }
   }
 
   &__history-heading {
@@ -280,7 +322,11 @@
     transition: box-shadow 0.3s ease;
 
     @media (max-width: 1200px) {
-      width: 83vw;
+      width: 55%;
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
     }
 
     &:hover {
@@ -316,16 +362,45 @@
 
   &__right {
     margin-top: 2rem;
+
+    @media (max-width: 768px) {
+      margin: 0 auto 4rem;
+      width: 94%;
+    }
   }
 
   &__top-right {
     display: flex;
     justify-content: end;
     gap: 2rem;
+
+    @media (max-width: 768px) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      align-items: center;
+      padding: 4rem 2rem;
+      height: 5rem;
+      background-color: $color-white;
+      width: 100%;
+      z-index: 2;
+      box-shadow: 0 0.6rem 0.6rem $color-light;
+    }
   }
 
   &__menu-btn {
     display: none;
+
+    @media (max-width: 768px) {
+      display: inline-block;
+      background: transparent;
+      cursor: pointer;
+      color: $color-info-dark;
+      position: absolute;
+      left: 1rem;
+      border: none;
+      font-size: 2rem;
+    }
   }
 
   &__theme-toggler {
@@ -338,6 +413,11 @@
     border-radius: $border-radius-1;
     background-color: $color-light;
     margin-right: 3rem;
+    margin-top: 1.5rem;
+
+    @media (max-width: 768px) {
+      margin-top: 0;
+    }
   }
 
   &__theme-btn {
@@ -357,6 +437,12 @@
     display: flex;
     gap: 2rem;
     text-align: right;
+
+    @media (max-width: 768px) {
+      .dashboard__name {
+        display: none;
+      }
+    }
   }
 
   &__recent-credits {
@@ -373,6 +459,10 @@
 
   &__services {
     margin-top: 2rem;
+
+    @media (max-width: 768px) {
+      padding: 0 1rem;
+    }
   }
 
   &__services-item {
@@ -383,7 +473,7 @@
     margin-top: 1.5rem;
     box-shadow: $box-shadow;
     border-radius: $border-radius-1;
-    padding: 1.6rem $card-padding;
+    padding: 1.6rem 1rem;
     transition: box-shadow 0.3s ease;
     box-shadow: $box-shadow;
 

@@ -1,5 +1,4 @@
 .form__group-file {
-  margin-top: 4rem;
   display: flex;
   position: relative;
   justify-content: center;
@@ -18,6 +17,4 @@
 .form__inputFile-btn {
   @include button-primary;
   width: 25rem;
-  margin: 2rem 0;
-
 }
